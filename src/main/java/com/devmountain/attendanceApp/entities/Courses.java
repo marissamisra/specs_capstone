@@ -24,7 +24,7 @@ public class Courses {
     @JsonBackReference
     private User user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "course")
     @JsonBackReference
-    private notes note;
+    private Notes note;
 }

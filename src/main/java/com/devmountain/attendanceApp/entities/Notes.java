@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class notes {
+public class Notes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

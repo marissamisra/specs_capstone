@@ -28,13 +28,13 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonBackReference
-    private Set<notes> notesSet = new HashSet<>();
+    private Set<Notes> notesSet = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonBackReference
-    private Set<attendance> attendanceSet = new HashSet<>();
+    private Set<Attendance> attendanceSet = new HashSet<>();
 
-    @ManyToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(mappedBy = "coursesSet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Courses> coursesSet = new HashSet<>();
 }
