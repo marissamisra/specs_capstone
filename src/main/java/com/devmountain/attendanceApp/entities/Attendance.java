@@ -41,10 +41,7 @@ public class Attendance {
             this.id = attendanceDto.getId();
 
         }
-        if (attendanceDto.getStudentId() != 0){
-            this.studentId = attendanceDto.getStudentId();
 
-        }
         if (attendanceDto.getDate() != null){
             this.date = attendanceDto.getDate();
 

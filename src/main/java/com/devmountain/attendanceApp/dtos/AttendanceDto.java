@@ -15,27 +15,23 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class AttendanceDto implements Serializable {
     private Long id;
-    private int studentId;
     private boolean present;
     private boolean tardy;
     private LocalDate date;
-    private User user;
+    private Long userId;
 
     public AttendanceDto(Attendance attendance){
         if (attendance.getId() != null){
             this.id = attendance.getId();
 
         }
-        if (attendance.getStudentId() != 0){
-            this.studentId = attendance.getStudentId();
 
-        }
         if (attendance.getDate() != null){
             this.date = attendance.getDate();
 
         }
         if (attendance.getUser() != null){
-            this.user = attendance.getUser();
+            this.userId = attendance.getUser().getId();
 
         }
         this.present = attendance.isPresent();
