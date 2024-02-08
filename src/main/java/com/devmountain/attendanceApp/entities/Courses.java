@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -39,7 +40,19 @@ public class Courses {
     @JsonBackReference(value = "course-notes")
     private Set<Notes> noteSet = new HashSet<>();
 
-    
+    @Override
+    public boolean equals(Object object) {
+        if(this == object) return true;
+        if(!(object instanceof Courses)) return false;
+        Courses courses = (Courses) object;
+        return Objects.equals(id, courses.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     public Courses (CoursesDto coursesDto){
         if (coursesDto.getId() != null){
             this.id = coursesDto.getId();

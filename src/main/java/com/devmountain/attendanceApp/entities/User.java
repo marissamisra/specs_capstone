@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -38,6 +39,19 @@ public class User {
     @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "user-course")
     private Set<Courses> coursesSet = new HashSet<>();
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if(!(object instanceof User)) return false;
+        User user = (User) object;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     public User (UserDto userDto){
 
