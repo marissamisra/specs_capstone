@@ -1,12 +1,13 @@
 package com.devmountain.attendanceApp.entities;
 
+import com.devmountain.attendanceApp.dtos.UserDto;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class User {
     private String name;
 
     @Column
-    private boolean is_instructor;
+    private boolean instructor;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonBackReference
@@ -34,8 +35,20 @@ public class User {
     @JsonBackReference
     private Set<Attendance> attendanceSet = new HashSet<>();
 
-    @ManyToMany(mappedBy = "coursesSet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //@ManyToMany(mappedBy = "coursesSet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "userSet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Courses> coursesSet = new HashSet<>();
+
+    public User (UserDto userDto){
+
+        if (userDto.getId() != 0){
+            this.id = userDto.getId();
+        }
+        if (userDto.getName() != null){
+            this.name = userDto.getName();
+        }
+        this.instructor = userDto.isInstructor();
+    }
 }
 

@@ -1,11 +1,12 @@
 package com.devmountain.attendanceApp.entities;
 
+import com.devmountain.attendanceApp.dtos.AttendanceDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -19,7 +20,7 @@ public class Attendance {
     private Long id;
 
     @Column
-    private int student_id;
+    private int studentId;
 
     @Column
     private boolean present;
@@ -33,4 +34,22 @@ public class Attendance {
     @ManyToOne
     @JsonBackReference
     private User user;
+
+    public Attendance (AttendanceDto attendanceDto){
+
+        if (attendanceDto.getId() != 0){
+            this.id = attendanceDto.getId();
+
+        }
+        if (attendanceDto.getStudentId() != 0){
+            this.studentId = attendanceDto.getStudentId();
+
+        }
+        if (attendanceDto.getDate() != null){
+            this.date = attendanceDto.getDate();
+
+        }
+        this.present = attendanceDto.isPresent();
+        this.tardy = attendanceDto.isTardy();
+    }
 }
