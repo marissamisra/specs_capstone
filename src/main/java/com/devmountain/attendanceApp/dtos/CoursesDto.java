@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -13,11 +14,11 @@ public class CoursesDto implements Serializable {
 
     private Long id;
     private String name;
-    private Set<UserDto> userDtos;
+    private Set<UserDto> usersDto;
     private Set<NotesDto> noteDtos;
 
     public void setUserSet(Set<UserDto> userSet) {
-        this.userDtos = userSet;
+        this.usersDto = userSet;
     }
 
     public void setNoteSet(Set<NotesDto> noteSet) {
@@ -25,16 +26,14 @@ public class CoursesDto implements Serializable {
     }
 
     public CoursesDto(Courses course){
-        if (course.getId() != null){
-            this.id = course.getId();
+        this.id = course.getId();
+        this.name = course.getName();
+        if (course.getUsers() != null){
+            this.usersDto = course.getUsers().stream().map(UserDto::new).collect(Collectors.toSet());
         }
-//        if (course.getUsers() != null){
-//            this.userDtos = course.getUsers();
-//        }
-//
-//        if (course.getNoteSet() != null){
-//            this.noteDtos = course.getNoteSet();
-//        }
+        if (course.getNoteSet() != null){
+            this.noteDtos = course.getNoteSet().stream().map(NotesDto::new).collect(Collectors.toSet());
+        }
 
     }
 

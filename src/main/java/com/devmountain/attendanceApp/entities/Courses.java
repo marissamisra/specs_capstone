@@ -26,7 +26,7 @@ public class Courses {
     @Column(unique = true)
     private String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "course_user",
             joinColumns = @JoinColumn(name = "course_id"),
@@ -39,17 +39,13 @@ public class Courses {
     @JsonBackReference(value = "course-notes")
     private Set<Notes> noteSet = new HashSet<>();
 
+    
     public Courses (CoursesDto coursesDto){
         if (coursesDto.getId() != null){
             this.id = coursesDto.getId();
         }
-//        if (coursesDto.getUserSet() != null){
-//            this.userSet = coursesDto.getUserSet();
-//        }
-//        if (coursesDto.getNoteSet() != null){
-//            this.noteSet = coursesDto.getNoteSet();
-//        }
     }
+
     public void addUser(User user) {
         this.users.add(user);
         user.getCoursesSet().add(this);
