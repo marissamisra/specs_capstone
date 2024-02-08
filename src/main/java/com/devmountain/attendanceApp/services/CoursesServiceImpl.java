@@ -21,4 +21,11 @@ public class CoursesServiceImpl {
             return null;
         }
     }
+
+    public CoursesDto createCourse(CoursesDto courseDto) {
+        Courses course = new Courses();
+        course.setName(courseDto.getName());
+        Courses savedCourse = coursesRepository.save(course);
+        return new CoursesDto(savedCourse);
+    }
 }

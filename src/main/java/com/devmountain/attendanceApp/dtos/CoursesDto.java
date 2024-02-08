@@ -12,31 +12,29 @@ import java.util.Set;
 public class CoursesDto implements Serializable {
 
     private Long id;
-    private Set<User> userSet;
-    private Set<Notes> noteSet;
+    private String name;
+    private Set<UserDto> userDtos;
+    private Set<NotesDto> noteDtos;
 
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
+    public void setUserSet(Set<UserDto> userSet) {
+        this.userDtos = userSet;
     }
 
-    public void setNoteSet(Set<Notes> noteSet) {
-        this.noteSet = noteSet;
+    public void setNoteSet(Set<NotesDto> noteSet) {
+        this.noteDtos = noteSet;
     }
 
-    public CoursesDto(Courses courses){
-        if (courses.getId() != null){
-            this.id = courses.getId();
-
+    public CoursesDto(Courses course){
+        if (course.getId() != null){
+            this.id = course.getId();
         }
-        if (courses.getUserSet() != null){
-            this.userSet = courses.getUserSet();
-
-        }
-
-        if (courses.getNoteSet() != null){
-            this.noteSet = courses.getNoteSet();
-
-        }
+//        if (course.getUsers() != null){
+//            this.userDtos = course.getUsers();
+//        }
+//
+//        if (course.getNoteSet() != null){
+//            this.noteDtos = course.getNoteSet();
+//        }
 
     }
 

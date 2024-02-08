@@ -2,7 +2,7 @@ package com.devmountain.attendanceApp.entities;
 
 import com.devmountain.attendanceApp.dtos.UserDto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,16 +28,15 @@ public class User {
     private boolean instructor;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonBackReference
+    @JsonManagedReference(value = "user-notes")
     private Set<Notes> notesSet = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonBackReference
+    @JsonManagedReference(value = "user-attendance")
     private Set<Attendance> attendanceSet = new HashSet<>();
 
-    //@ManyToMany(mappedBy = "coursesSet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @ManyToMany(mappedBy = "userSet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "user-course")
     private Set<Courses> coursesSet = new HashSet<>();
 
     public User (UserDto userDto){
@@ -49,6 +48,16 @@ public class User {
             this.name = userDto.getName();
         }
         this.instructor = userDto.isInstructor();
+    }
+
+    public void addCourse(Courses course) {
+        this.coursesSet.add(course);
+        course.getUsers().add(this);
+    }
+
+    public void removeCourse(Courses course) {
+        this.coursesSet.remove(course);
+        course.getUsers().remove(this);
     }
 }
 

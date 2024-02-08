@@ -26,7 +26,29 @@ public class UserController {
     }
 
     @PostMapping
-    public String createAttendance(@RequestBody UserDto userDto) {
-        return "User record created successfully";
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) {
+        UserDto createdUser = userService.createUser(user);
+        return ResponseEntity.ok(createdUser);
     }
+
+    @PostMapping("/{userId}/enroll/{courseId}")
+    public ResponseEntity<?> enrollUserInCourse(@PathVariable Long userId, @PathVariable Long courseId) {
+        try {
+            userService.enrollUserInCourse(userId, courseId);
+            return ResponseEntity.ok("User enrolled in course successfully.");
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{userId}/drop/{courseId}")
+    public ResponseEntity<?> dropUserFromCourse(@PathVariable Long userId, @PathVariable Long courseId) {
+        try {
+            userService.dropUserFromCourse(userId, courseId);
+            return ResponseEntity.ok("Student successfully dropped");
+        } catch (Exception exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
+    }
+
 }

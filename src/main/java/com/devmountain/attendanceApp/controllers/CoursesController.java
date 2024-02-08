@@ -27,7 +27,8 @@ public class CoursesController {
     }
 
     @PostMapping
-    public String createAttendance(@RequestBody CoursesDto coursesDto) {
-        return "Course created successfully";
+    public ResponseEntity<CoursesDto> createCourse(@RequestBody CoursesDto course) {
+        CoursesDto createdCourse = coursesService.createCourse((course));
+        return ResponseEntity.ok(createdCourse);
     }
 }

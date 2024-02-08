@@ -12,31 +12,15 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class NotesDto implements Serializable {
     private Long id;
-    private int studentId;
     private String note;
-    private User user;
-    private Courses course;
+    private Long userId;
+    private Long courseId;
 
     public NotesDto(Notes note){
-        if (note.getId() != null){
-            this.id = note.getId();
+        this.id = note.getId();
+        this.note = note.getNote();
+        this.userId = note.getUser() != null ? note.getUser().getId() : null;
+        this.courseId = note.getCourse() != null ? note.getCourse().getId() : null;
 
-        }
-        if (note.getStudentId() != 0){
-            this.studentId = note.getStudentId();
-
-        }
-        if (note.getNote() != null){
-            this.note = note.getNote();
-
-        }
-        if (note.getUser() != null){
-            this.user = note.getUser();
-
-        }
-        if (note.getCourse() != null){
-            this.course = note.getCourse();
-
-        }
     }
 }

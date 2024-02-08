@@ -10,50 +10,56 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "notes")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class Notes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private int studentId;
-
-    @Column(columnDefinition = "text")
     private String note;
 
-    //@Column
-    //private int courseId;
-
-    @ManyToOne
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
     private Courses course;
 
-    public Notes (NotesDto notesDto){
-        if (notesDto.getId() != 0){
-            this.id = notesDto.getId();
-        }
-        if (notesDto.getStudentId() != 0){
-            this.studentId = notesDto.getStudentId();
+    public Notes (){
+    }
 
-        }
-        if (notesDto.getNote() != null){
-            this.note = notesDto.getNote();
+    public Long getId() {
+        return id;
+    }
 
-        }
-        if (notesDto.getUser() != null){
-            this.user = notesDto.getUser();
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        }
-        if (notesDto.getCourse() != null){
-            this.course = notesDto.getCourse();
+    public String getNote() {
+        return note;
+    }
 
-        }
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Courses getCourse() {
+        return course;
+    }
+
+    public void setCourse(Courses course) {
+        this.course = course;
     }
 }
