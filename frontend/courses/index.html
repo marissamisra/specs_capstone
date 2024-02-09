@@ -7,13 +7,23 @@
 </head>
 <body>
     <div>
-        <h1>Attendance App</h1>
+        <h1 id="course">That course wasnt found, please navigate back</h1>
+        <h5 id="instructors"></h5>
     </div>
     <div>
-        <h3>Courses</h3>
-        <ul id="student-list"></ul>
+        <h3>Enrolled</h3>
+        <ul id="students"></ul>
     </div>
 
+    <div>
+        <h4>Add a Student or Teacher to the Course</h4>
+        <form id="add-user-to-course">
+            <select name="add-existing-user" id="add-existing-user">
+                
+              </select>
+            <input type="submit" />
+        </form>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js" ></script>
     <script src="./courses.js"></script>
 </body>

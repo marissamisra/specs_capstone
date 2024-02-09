@@ -10,8 +10,25 @@
         <h1>Attendance App</h1>
     </div>
     <div>
-        <h3>Courses</h3>
-        <ul id="courses-list"></ul>
+        <h3>All Courses</h3>
+        <ul id="all-courses-list"></ul>
+    </div>
+    <div>
+        <h4>All Teachers</h4>
+        <ul id="all-teachers-list"></ul>
+    </div>
+    <div>
+        <h4>All Students</h4>
+        <ul id="all-students-list"></ul>
+    </div>
+    <div>
+        <h4>Add a Student or Teacher</h4>
+        <form id="new-user">
+            <input id="new-user-name" type="text" placeholder="name"/>
+            <input id="isTeacher" name="isTeacher" type="checkbox" />
+            <label for="isTeacher">Teacher?</label>
+            <input type="submit" />
+        </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js" ></script>
     <script src="./home.js"></script>
