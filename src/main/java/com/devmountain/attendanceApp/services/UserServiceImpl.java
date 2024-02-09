@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl {
@@ -18,6 +20,11 @@ public class UserServiceImpl {
 
     @Autowired
     private CoursesRepository coursesRepository;
+
+    public List<UserDto> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream().map(UserDto::new).collect(Collectors.toList());
+    }
 
     public UserDto getUserById(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
