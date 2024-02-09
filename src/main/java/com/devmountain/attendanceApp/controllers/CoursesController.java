@@ -18,7 +18,14 @@ public class CoursesController {
     public CoursesController(CoursesServiceImpl coursesService) {
         this.coursesService = coursesService;
     }
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
+    @GetMapping
+    public ResponseEntity<List<CoursesDto>> getAllCourses() {
+        List<CoursesDto> coursesDtos = coursesService.getAllCourses();
+        return ResponseEntity.ok(coursesDtos);
+    }
 
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
     @GetMapping("/{id}")
     public ResponseEntity<CoursesDto> getCourses(@PathVariable Long id) {
         CoursesDto courses = coursesService.getCoursesById(id);
@@ -28,19 +35,17 @@ public class CoursesController {
         return ResponseEntity.ok(courses);
     }
 
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
     @PostMapping
     public ResponseEntity<CoursesDto> createCourse(@RequestBody CoursesDto course) {
         CoursesDto createdCourse = coursesService.createCourse((course));
         return ResponseEntity.ok(createdCourse);
     }
 
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
     @PostMapping("/{courseId}/users")
     public ResponseEntity<?> addUsersToCourse(@PathVariable Long courseId, @RequestBody List<Long> userIds) {
-//        try {
-            CoursesDto updatedCourse = coursesService.addUsersToCourse(courseId, userIds);
-            return ResponseEntity.ok(updatedCourse);
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
+        CoursesDto updatedCourse = coursesService.addUsersToCourse(courseId, userIds);
+        return ResponseEntity.ok(updatedCourse);
     }
 }
