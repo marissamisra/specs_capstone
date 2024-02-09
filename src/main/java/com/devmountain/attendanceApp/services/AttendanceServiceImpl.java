@@ -57,4 +57,9 @@ public class AttendanceServiceImpl {
         List<Attendance> attendance = attendanceRepository.findByCourseId(courseId);
         return attendance.stream().map(AttendanceDto::new).collect(Collectors.toList());
     }
+
+    public List<AttendanceDto> getAttendanceByUserId(Long userId) {
+        List<Attendance> attendance = attendanceRepository.findByUserId(userId);
+        return attendance.stream().map(AttendanceDto::new).collect(Collectors.toList());
+    }
 }
