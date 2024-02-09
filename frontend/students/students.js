@@ -1,6 +1,10 @@
 const courseName = document.querySelector("#course-name");
 const studentName = document.querySelector("#student");
 const attendanceList = document.querySelector("#attendance");
+const attendanceForm = document.querySelector("#add-student-attendance-record")
+const isPresentCheckbox = document.querySelector("#present");
+const isTardyCheckbox = document.querySelector("#late");
+const dateSelector = document.querySelector('#date')
 
 const searchParams = new URLSearchParams(window.location.search)
 const courseId = searchParams.get('course')
@@ -33,12 +37,28 @@ function getStudentName () {
 
 function getCourseName () {
     axios.get(`http://localhost:8080/api/courses/${courseId}`).then(res => {
-        // console.log(res.data)
         if(res.data){
             courseName.innerHTML = res.data.name
         }
     });
 }
+
+function submitAttendance (event) {
+    event.preventDefault();
+    
+    const body = {
+        date: dateSelector.value,
+        present: isPresentCheckbox.checked,
+        tardy: isTardyCheckbox.checked,
+        userId: studentId,
+        courseId: courseId
+    }
+    axios.post('http://localhost:8080/api/attendance', body).then(() => {
+        getStudentAttendance()
+    })
+}
+
+attendanceForm.addEventListener('submit', submitAttendance)
 
 getStudentAttendance();
 getStudentName();

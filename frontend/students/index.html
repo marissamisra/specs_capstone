@@ -16,6 +16,18 @@
         <h3>Attendance</h3>
         <ul id="attendance"></ul>
     </div>
+
+    <div>
+        <h4>Add a Student attendance record</h4>
+        <form id="add-student-attendance-record">
+            <input id="date" type="date" placeholder="name"/>
+            <input id="present" name="present" type="checkbox" />
+            <label for="present">Present</label>
+            <input id="late" name="late" type="checkbox" />
+            <label for="late">Late</label>
+            <input type="submit" />
+        </form>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js" ></script>
     <script src="./students.js"></script>
 </body>

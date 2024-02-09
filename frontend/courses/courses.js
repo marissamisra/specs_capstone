@@ -13,8 +13,10 @@ function getAllCourses () {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:8080/api/courses/${courseId}`).then(res => {
             if(res.data){
+                console.log(res.data)
                 courseName.innerHTML = res.data.name
                 listStudents(res.data.enrolledUsers)
+                listInstructors(res.data.enrolledUsers)
                 resolve()
             } 
         });
@@ -32,6 +34,17 @@ function listStudents (userList) {
     }
 }
 
+function listInstructors (userList) {
+    enrolledUsers = userList
+    if (userList.length) {
+        instructor.innerHTML = userList.map(element => {
+            if (element.instructor) {
+                return `<a href=${`../students/?student=${element.id}&course=${courseId}`}><li>${element.name}</li></a> <button onclick=dropStudentFromCourse(${element.id})>Drop</button>`
+            }
+        }).join('');
+    }
+}
+
 async function populateUserSelectDropDown () {
 
     const allUsersResponse = await getAllUsers()
@@ -42,17 +55,10 @@ async function populateUserSelectDropDown () {
         instructor: false
     }
     allUsers.unshift(selectMessageObj)
-    console.log({allUsers})
-    console.log({enrolledUsers})
-
     const filteredUsers = allUsers.filter(obj1 => {
         return !enrolledUsers.some(obj2 => obj2.id === obj1.id);
     });
-
-    console.log(filteredUsers)
-
     userSelect.innerHTML = ''
-
     filteredUsers.forEach(user => {
         const option = document.createElement('option');
         option.value = user.id;
@@ -63,29 +69,30 @@ async function populateUserSelectDropDown () {
 
 function addUserToCourse(event) {
     event.preventDefault()
-    console.log(userSelect.value)
     if (userSelect.value) {
         const body = +userSelect.value
         axios.post(`http://localhost:8080/api/courses/${courseId}/users`, [body]).then(res => {
-            console.log(res.data)
-            getAllCourses().then(() => {
-                populateUserSelectDropDown();
-            })
+            repopulateAll()
         })
     }
 }
 
 function dropStudentFromCourse (studentId) {
-    
+    axios.delete(`http://localhost:8080/api/courses/${courseId}/users`, {data: [studentId]}).then(() => {
+        repopulateAll()
+    })
 }
 
 async function getAllUsers() {
     return await axios.get("http://localhost:8080/api/users")
 }
 
+function repopulateAll () {
+    getAllCourses().then(() => {
+        populateUserSelectDropDown();
+    });
+}
+
 form.addEventListener('submit', addUserToCourse)
 
-
-getAllCourses().then(() => {
-    populateUserSelectDropDown();
-});
+repopulateAll()
