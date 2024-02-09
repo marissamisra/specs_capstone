@@ -35,18 +35,28 @@ public class Attendance {
     @JsonBackReference
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
+    private Courses course;
+
     public Attendance (AttendanceDto attendanceDto){
 
         if (attendanceDto.getId() != 0){
             this.id = attendanceDto.getId();
-
         }
 
         if (attendanceDto.getDate() != null){
             this.date = attendanceDto.getDate();
-
         }
         this.present = attendanceDto.isPresent();
         this.tardy = attendanceDto.isTardy();
+    }
+
+    public Courses getCourse() {
+        return course;
+    }
+
+    public void setCourse(Courses course) {
+        this.course = course;
     }
 }

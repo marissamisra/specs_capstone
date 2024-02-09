@@ -19,7 +19,7 @@ public class AttendanceDto implements Serializable {
     private boolean tardy;
     private LocalDate date;
     private Long userId;
-//    private Courses course;
+    private Long courseId;
 
     public AttendanceDto(Attendance attendance){
         if (attendance.getId() != null){
@@ -37,6 +37,7 @@ public class AttendanceDto implements Serializable {
         }
         this.present = attendance.isPresent();
         this.tardy = attendance.isTardy();
+        this.courseId = attendance.getCourse().getId();
     }
 
 }
