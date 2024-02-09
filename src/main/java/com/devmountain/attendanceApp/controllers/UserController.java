@@ -18,12 +18,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
         List<UserDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
         UserDto user = userService.getUserById(id);
@@ -33,12 +35,14 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
     @PostMapping
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto user) {
         UserDto createdUser = userService.createUser(user);
         return ResponseEntity.ok(createdUser);
     }
 
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
     @PostMapping("/{userId}/enroll/{courseId}")
     public ResponseEntity<?> enrollUserInCourse(@PathVariable Long userId, @PathVariable Long courseId) {
         try {
@@ -49,6 +53,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
     @DeleteMapping("/{userId}/drop/{courseId}")
     public ResponseEntity<?> dropUserFromCourse(@PathVariable Long userId, @PathVariable Long courseId) {
         try {

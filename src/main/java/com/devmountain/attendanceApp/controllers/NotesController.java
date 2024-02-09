@@ -16,6 +16,7 @@ public class NotesController {
         this.notesService = notesService;
     }
 
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
     @GetMapping("/{id}")
     public ResponseEntity<NotesDto> getNotes(@PathVariable Long id) {
         NotesDto notes = notesService.getNotesById(id);
@@ -25,6 +26,7 @@ public class NotesController {
         return ResponseEntity.ok(notes);
     }
 
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
     @PostMapping
     public String createNote(@RequestBody NotesDto notesDto) {
         return "Note created successfully";
