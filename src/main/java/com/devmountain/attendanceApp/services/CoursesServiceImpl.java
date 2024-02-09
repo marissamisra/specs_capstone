@@ -59,4 +59,17 @@ public class CoursesServiceImpl {
         List<Courses> coursesList = coursesRepository.findAll();
         return coursesList.stream().map(CoursesDto::new).collect(Collectors.toList());
     }
+
+    @Transactional
+    public void removeUserFromCourse(Long courseId, List<Long> userIds) {
+        Courses course = coursesRepository.findById(courseId).orElseThrow(() -> new RuntimeException("Course not found"));
+
+        userIds.forEach(userId -> {
+            User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+            course.removeUser(user);
+        });
+
+        coursesRepository.save(course);
+    }
+
 }

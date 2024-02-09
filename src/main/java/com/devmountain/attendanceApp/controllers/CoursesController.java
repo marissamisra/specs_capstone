@@ -48,4 +48,11 @@ public class CoursesController {
         CoursesDto updatedCourse = coursesService.addUsersToCourse(courseId, userIds);
         return ResponseEntity.ok(updatedCourse);
     }
+
+    @CrossOrigin(origins = {"http://localhost:3000/", "http://127.0.0.1:50394"})
+    @DeleteMapping("/{courseId}/users")
+    public ResponseEntity<?> removeUsersFromCourse(@PathVariable Long courseId, @RequestBody List<Long> userIds) {
+        coursesService.removeUserFromCourse(courseId, userIds);
+        return ResponseEntity.ok().build();
+    }
 }
