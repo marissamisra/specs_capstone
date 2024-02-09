@@ -10,7 +10,9 @@ import com.devmountain.attendanceApp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AttendanceServiceImpl {
@@ -49,5 +51,10 @@ public class AttendanceServiceImpl {
         attendanceDto.setCourseId(course.getId());
         return attendanceDto;
 
+    }
+
+    public List<AttendanceDto> findAllAttendanceForCourse(Long courseId) {
+        List<Attendance> attendance = attendanceRepository.findByCourseId(courseId);
+        return attendance.stream().map(AttendanceDto::new).collect(Collectors.toList());
     }
 }

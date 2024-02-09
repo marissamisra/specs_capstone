@@ -2,9 +2,12 @@ package com.devmountain.attendanceApp.controllers;
 
 import com.devmountain.attendanceApp.dtos.AttendanceDto;
 import com.devmountain.attendanceApp.services.AttendanceServiceImpl;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/attendance")
@@ -22,6 +25,12 @@ public class AttendanceController {
         if (attendance == null) {
             return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok(attendance);
+    }
+
+    @GetMapping("/course/{courseId}")
+    public ResponseEntity<List<AttendanceDto>> getAllAttendanceForCourse(@PathVariable Long courseId) {
+        List<AttendanceDto> attendance = attendanceService.findAllAttendanceForCourse(courseId);
         return ResponseEntity.ok(attendance);
     }
 
