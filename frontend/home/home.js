@@ -18,7 +18,7 @@ function getAllCourses() {
         })
         .join("");
     }
-  });
+  }).catch((err) => console.log(err));
 }
 
 function getAllUsers() {
@@ -39,7 +39,7 @@ function getAllUsers() {
         })
         .join("");
     }
-  });
+  }).catch((err) => console.log(err));
 }
 
 function addUser(event) {
@@ -54,7 +54,7 @@ function addUser(event) {
     newUserName.value = "";
     isTeacherCheckbox.checked = false;
     getAllUsers();
-  });
+  }).catch((err) => console.log(err));
 }
 
 function addCourse (event) {
@@ -67,7 +67,7 @@ function addCourse (event) {
     newCourseName.value = ""
     getAllCourses();
 
-  })
+  }).catch((err) => console.log(err))
 }
 
 newUserForm.addEventListener("submit", addUser);
