@@ -13,7 +13,6 @@ function getAllCourses () {
     return new Promise((resolve, reject) => {
         axios.get(`http://localhost:8080/api/courses/${courseId}`).then(res => {
             if(res.data){
-                console.log(res.data)
                 courseName.innerHTML = res.data.name
                 listStudents(res.data.enrolledUsers)
                 listInstructors(res.data.enrolledUsers)
