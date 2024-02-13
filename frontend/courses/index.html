@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../shared-styles/reset.css">
-    <link rel="stylesheet" href="./courses.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../shared-styles/shared.css" />
+    <link rel="stylesheet" href="./courses.css" />
     <title id="title">Attendance Tracker - Courses</title>
-</head>
-<body>
-    <div>
+  </head>
+  <body>
+    <div class="container">
+      <div>
         <h1 id="course">That course wasnt found, please navigate back</h1>
-    </div>
-    <div>
+      </div>
+      <div>
         <h3>Instructors</h3>
         <ul id="instructors"></ul>
-    </div>
-    <div>
+      </div>
+      <div>
         <h3>Enrolled</h3>
         <ul id="students"></ul>
-    </div>
+      </div>
 
-    <div>
+      <div>
         <h4>Add a Student or Teacher to the Course</h4>
         <form id="add-user-to-course">
-            <select name="add-existing-user" id="add-existing-user">
-                
-              </select>
-            <input type="submit" />
+          <select name="add-existing-user" id="add-existing-user"></select>
+          <input type="submit" />
         </form>
+      </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
     <script src="./courses.js"></script>
-</body>
+  </body>
 </html>

@@ -27,7 +27,7 @@ function listStudents (userList) {
     if (userList.length) {
         students.innerHTML = userList.map(element => {
             if (!element.instructor) {
-                return `<a href=${`../students/?student=${element.id}&course=${courseId}`}><li>${element.name}</li></a> <button onclick=dropStudentFromCourse(${element.id})>Drop</button>`
+                return `<div class='flex'><a href=${`../students/?student=${element.id}&course=${courseId}`}><li>${element.name}</li></a> <button class='margin10' onclick=dropStudentFromCourse(${element.id})>Drop</button></div>`
             }
         }).join('');
     }
@@ -38,7 +38,7 @@ function listInstructors (userList) {
     if (userList.length) {
         instructor.innerHTML = userList.map(element => {
             if (element.instructor) {
-                return `<a href=${`../students/?student=${element.id}&course=${courseId}`}><li>${element.name}</li></a> <button onclick=dropStudentFromCourse(${element.id})>Drop</button>`
+                return `<div class='flex'><a href=${`../students/?student=${element.id}&course=${courseId}`}><li>${element.name}</li></a> <button class='margin10' onclick=dropStudentFromCourse(${element.id})>Drop</button></div`
             }
         }).join('');
     }

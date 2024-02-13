@@ -15,10 +15,12 @@ function getStudentAttendance () {
         if(res.data) {
             attendanceList.innerHTML = res.data.map(element => {
                 return `
-                Date: ${element.date} <br>
-                Present: ${element.present} <br>
-                Tardy: ${element.tardy} <br>
-                <br>
+                <div class=attendance-unit>
+                    Date: ${element.date} <br>
+                    Present: ${element.present} <br>
+                    Tardy: ${element.tardy} <br>
+                    <br>
+                </div>
                 `
             }).join('')
             attendanceList.innerHTML

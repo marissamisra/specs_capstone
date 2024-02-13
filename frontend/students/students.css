@@ -1,0 +1,21 @@
+* {
+    color: #9D44B5;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+#course-name-container {
+    display: flex;
+    justify-content: center;
+}
+
+.attendance-unit {
+    color: #FFE45E;
+}
+
+input {
+    color: #9D44B5;
+}
